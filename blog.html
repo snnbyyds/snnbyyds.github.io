@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><span class="logo-icon">✨</span><span class="logo-text">Nuo Shen</span></a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="blog.html" class="nav-link active">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Page Header -->
+        <section class="blog-header">
+            <h1>Blog</h1>
+        </section>
+
+        <!-- Blog Filters/Categories -->
+        <section class="blog-controls">
+            <div class="search-container">
+                <input type="text" class="blog-search" id="blogSearch" placeholder="Search articles...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="research">Research</button>
+                <button class="filter-btn" data-category="tutorial">Tutorial</button>
+            </div>
+        </section>
+
+        <!-- Blog Posts Grid -->
+        <section class="blog-posts">
+            <!-- Sample Blog Post 1 -->
+            <!-- <article class="blog-card" data-category="research">
+                <div class="blog-card-header">
+                    <div class="blog-meta">
+                        <span class="blog-date">2024-03-10</span>
+                        <span class="blog-category research-tag">Research</span>
+                    </div>
+                    <h2 class="blog-title">
+                        The Future of Human-Computer Interaction in 2024
+                    </h2>
+                </div>
+                <p class="blog-excerpt">
+                    In this article, we explore emerging trends and technologies that are shaping the future of HCI. From multimodal interfaces to AI-assisted design...
+                </p>
+                <div class="blog-footer">
+                    <span class="read-time">5 min read</span>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article> -->
+        </section>
+
+        <!-- No Results Message -->
+        <div class="no-results" style="display: none;">
+            <p>No articles found matching your search.</p>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="load-more-container">
+            <button class="load-more-btn">Load More Articles</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            © 2026 Nuo Shen. All rights reserved. <br>
+            Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.
+        </p>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/blog.js"></script>
+</body>
+</html>
