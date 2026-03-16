@@ -467,6 +467,16 @@ main {
     margin-bottom: var(--spacing-lg);
     display: inline-block;
     transition: transform var(--transition-short);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.interest-icon img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
 }
 
 .interest-card:hover .interest-icon {
