@@ -1,244 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuo Shen</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuo Shen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --color-bg:       #fdfdfd;
+    --color-text:     #1a1a1a;
+    --color-text-alt: #555;
+    --color-accent:   #21618c;
+    --color-accent-hover: #164863;
+    --color-border:   #e5e7eb;
+    --color-surface:  #f4f5f7;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-text);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  a:hover { color: var(--color-accent-hover); }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section { padding: 3rem 0; }
+
+  section + section { border-top: 1px solid var(--color-border); }
+
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-alt);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1.75rem;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 4rem 0 2.5rem;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .header-photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .header-text h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+  }
+
+  .header-text .subtitle {
+    font-size: 1rem;
+    color: var(--color-text-alt);
+    margin-top: 0.2rem;
+  }
+
+  .header-text .affiliation {
+    font-size: 0.9rem;
+    color: var(--color-text-alt);
+    margin-top: 0.15rem;
+  }
+
+  .header-links {
+    display: flex;
+    gap: 0.65rem;
+    margin-top: 0.85rem;
+  }
+
+  .header-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    color: var(--color-text-alt);
+    font-size: 1rem;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .header-links a:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  /* ── About ── */
+  .about p {
+    max-width: 64ch;
+    color: var(--color-text);
+  }
+
+  .about p + p { margin-top: 1rem; }
+
+  /* ── Publications ── */
+  .pub-entry {
+    padding: 1.25rem 0;
+  }
+
+  .pub-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .pub-title a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--color-border);
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color 0.2s;
+  }
+
+  .pub-title a:hover {
+    text-decoration-color: var(--color-accent);
+  }
+
+  .pub-authors {
+    font-size: 0.9rem;
+    color: var(--color-text-alt);
+    margin-top: 0.35rem;
+  }
+
+  .pub-authors strong { color: var(--color-text); font-weight: 600; }
+
+  .pub-venue {
+    font-size: 0.85rem;
+    color: var(--color-text-alt);
+    margin-top: 0.2rem;
+  }
+
+  .pub-links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.55rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+
+  .pub-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    background: var(--color-surface);
+    color: var(--color-accent);
+    transition: background 0.2s;
+  }
+
+  .pub-links a:hover { background: var(--color-accent); color: #fff; }
+
+  /* ── Projects ── */
+  .project-list {
+    list-style: none;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .project-item {
+    padding: 1.1rem 1.25rem;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .project-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-alt);
+    margin-top: 0.3rem;
+    line-height: 1.55;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  /* ── Education ── */
+  .edu-entry {
+    padding: 0.5rem 0;
+  }
+
+  .edu-entry .school {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .edu-entry .degree {
+    font-size: 0.9rem;
+    color: var(--color-text-alt);
+    margin-top: 0.1rem;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 2rem 0 3rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color-text-alt);
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 640px) {
+    .container { padding: 0 18px; }
+
+    header { padding: 2.5rem 0 1.75rem; }
+
+    .header-inner {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .header-photo { width: 96px; height: 96px; }
+
+    .header-text h1 { font-size: 1.5rem; }
+
+    .header-links { justify-content: center; }
+
+    section { padding: 2.25rem 0; }
+
+    .project-item { border-left: none; border-radius: 8px; border-top: 3px solid var(--color-accent); }
+  }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { font-size: 13px; line-height: 1.5; }
+    header { padding: 1rem 0; }
+    .header-photo { width: 72px; height: 72px; }
+    .header-links a { background: none; }
+    section { padding: 1rem 0; }
+    .project-link, .pub-links a { background: none; border: 1px solid var(--color-border); }
+  }
+</style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html"><i class="fas fa-graduation-cap logo-icon"></i><span class="logo-text">Nuo Shen</span></a>
-            </div>
-            <div class="nav-menu">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="blog.html" class="nav-link">Blog</a>
-            </div>
+
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <img class="header-photo" src="data/images/sn.jpg" alt="Nuo Shen" width="110" height="110" loading="eager" decoding="async">
+      <div class="header-text">
+        <h1>Nuo Shen</h1>
+        <div class="subtitle">Undergraduate Student, Nanjing University</div>
+        <div class="affiliation">Intelligent Software and Engineering &middot; 2024 &ndash; Present</div>
+        <div class="header-links">
+          <a href="https://github.com/snnbyyds" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+          <a href="mailto:snnbyyds@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
-    </nav>
+      </div>
+    </div>
+  </div>
+</header>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-content">
-                <div class="profile-image-container">
-                    <div class="profile-image-placeholder">
-                        <img src="data/images/sn.jpg" alt="Nuo Shen">
-                    </div>
-                </div>
-                <div class="hero-text">
-                    <h1 class="hero-title">Nuo Shen</h1>
-                    <p class="hero-subtitle">Undergraduate Student, Intelligent Software and Engineering, Nanjing University (2024–Present)</p>
-                    <p class="hero-description">
-                        Passionate about HPC & GPU computing, artificial intelligence, RISC-V and LineageOS.
-                    </p>
-                    <div class="wakatime-badge-container">
-                        <a href="https://wakatime.com/@9be3a183-0577-4461-a530-f539124aa950" class="wakatime-badge" title="View my WakaTime stats" aria-label="WakaTime Statistics">
-                            <img src="https://wakatime.com/badge/user/9be3a183-0577-4461-a530-f539124aa950.svg" alt="Total time coded since Sep 12 2025" />
-                        </a>
-                    </div>
-                    <div class="social-links">
-                        <a href="https://github.com/snnbyyds" class="social-link" title="GitHub" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="mailto:snnbyyds@gmail.com" class="social-link" title="Email" aria-label="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://wpa.qq.com/msgrd?v=3&uin=3965547127&site=qq&menu=yes" class="social-link" class="social-link" title="QQ" aria-label="QQ">
-                            <img src="data/icons/QQ_tencent-qq.svg" alt="QQ">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+<section id="about">
+  <div class="container">
+    <div class="about">
+      <p>
+        I am an undergraduate student at Nanjing University interested in building efficient systems for large-scale machine learning. My current work spans speculative decoding and sparse attention for LLM inference, GPU kernel optimization with CUDA and Triton, and system-level programming.
+      </p>
+    </div>
+  </div>
+</section>
 
-        <!-- About Section -->
-        <section class="about-section">
-            <div class="section-header">
-                <h2>About Me</h2>
-                <div class="header-line"></div>
-            </div>
-            <div class="about-content">
-                <p>
-                    I am a sophomore at <a href="https://www.nju.edu.cn/">Nanjing University</a> (Suzhou Campus), majoring in Intelligent Software and Engineering, focusing on High-Performance Computing (HPC) and low-level system development. My core strength is translating technical expertise into practical engineering outcomes.
-                </p>
-                <p>
-                    Proficient in C/C++, with working knowledge of Java, Python, Go, HTML and JavaScript, I have in-depth mastery of the RISC-V RV64GC instruction set and common development toolchains (git, gcc, clang, gdb), enabling efficient work in Linux environments.
-                </p>
-                <p>
-                    In HPC and GPU programming, I master CUDA and Triton, achieving 1200x optimization for GDN Decode and 50000x for GDN Prefill in <a href="https://mlsys26.flashinfer.ai/">FlashInfer AI Kernel Generation Contest</a> (Track C).
-                </p>
-                <p>
-                    As a core developer of UEMU and <a href="https://github.com/Uotan-Dev/uotan_riscv_emu-ng">UEMU-NG</a> RISC-V emulators, I built RV64GC subsets from scratch and led UEMU’s full-stack refactoring.
-                </p>
-            </div>
-        </section>
+<section id="publications">
+  <div class="container">
+    <div class="section-title">Preprints</div>
+    <div class="pub-entry">
+      <div class="pub-title">
+        <a href="https://arxiv.org/abs/2605.19893" target="_blank" rel="noopener">SSV: Sparse Speculative Verification for Efficient LLM Inference</a>
+      </div>
+      <div class="pub-authors">
+        Zhibin Wang, Ziyu Zhong, <strong>Nuo Shen</strong>, Yuhang Zhou, Rong Gu, Sheng Zhong
+      </div>
+      <div class="pub-venue">
+        State Key Laboratory for Novel Software Technology, Nanjing University &middot; arXiv: 2605.19893 [cs.OS], 2026
+      </div>
+      <div class="pub-links">
+        <a href="https://arxiv.org/abs/2605.19893" target="_blank" rel="noopener"><i class="fas fa-file-lines"></i> arXiv</a>
+        <a href="https://arxiv.org/pdf/2605.19893" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i> PDF</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Research Interests Section -->
-        <section class="interests-section">
-            <div class="section-header">
-                <h2>Research Interests</h2>
-                <div class="header-line"></div>
-            </div>
-            <div class="interests-grid">
-                <div class="interest-card">
-                    <div class="interest-icon">
-                        <img src="data/images/nvidia.png" alt="nvidia">
-                    </div>
-                    <h3>HPC & GPU Computing</h3>
-                    <p>Accelerating complex workloads through parallel architecture and performance tuning.</p>
-                </div>
-                <div class="interest-card">
-                    <div class="interest-icon">
-                        <img src="data/icons/RISC-V-logo.svg" alt="RISC-V">
-                    </div>
-                    <h3>RISC-V</h3>
-                    <p>Building transparent, scalable, and high-performance processor architectures through minimalist design.</p>
-                </div>
-                <div class="interest-card">
-                    <div class="interest-icon">
-                        <img src="data/icons/Lineage_OS_logo.svg" alt="RISC-V">
-                    </div>
-                    <h3>Custom ROMs & Systems</h3>
-                    <p>Fostering open-source ecosystems by contributing to LineageOS.</p>
-                </div>
-            </div>
-        </section>
+<section id="projects">
+  <div class="container">
+    <div class="section-title">Projects</div>
+    <div class="project-list">
+      <div class="project-item">
+        <div class="project-name">Uotan RISC-V Emulator NG</div>
+        <div class="project-desc">
+          A full-system RISC-V emulator (RV64GC) capable of booting real firmware and OS images, including Debian and EDK2/UEFI. Emphasizes ISA compliance and educational clarity.
+        </div>
+        <a class="project-link" href="https://github.com/Uotan-Dev/uotan_riscv_emu-ng" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+      </div>
 
-        <!-- Featured Projects Section -->
-        <section class="projects-section">
-            <div class="section-header">
-                <h2>Featured Projects</h2>
-                <div class="header-line"></div>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="data/images/b200.jpg" alt="GDN" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h3>Gated Delta Net kernel (private repository for now)</h3>
-                        <p class="project-description">
-                            Super fast Gated Delta Net used in Qwen3-Next, for <a href="https://mlsys26.flashinfer.ai/">FlashInfer AI Kernel Generation Contest</a>
-                        </p>
-                        <a href="https://github.com/CudaSyncThreads/flashinfer-bench-starter-kit" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub
-                        </a>
-                    </div>
-                </div>
+      <div class="project-item">
+        <div class="project-name">Gated Delta Net Kernel Implementation</div>
+        <div class="project-desc">
+          Optimized CUDA/Triton kernels for the Gated Delta Net (Qwen3-Next) architecture, developed as part of the MLSys 2026 FlashInfer AI Kernel Generation Competition.
+        </div>
+        <a class="project-link" href="https://github.com/CudaSyncThreads/flashinfer-bench-starter-kit" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+      </div>
 
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="data/images/uemu-ng.png" alt="UEMU-NG" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h3>Uotan RISC-V Emulator NG</h3>
-                        <p class="project-description">Next Generation of Uotan RISC-V Emulator</p>
-                        <a href="https://github.com/Uotan-Dev/uotan_riscv_emu-ng" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub
-                        </a>
-                    </div>
-                </div>
+      <div class="project-item">
+        <div class="project-name">LineageOS for Qualcomm Reference Design</div>
+        <div class="project-desc">
+          Android device tree and vendor support for the QRD 8350 (lahaina) platform.
+        </div>
+        <a class="project-link" href="https://github.com/QRD-Development/android_device_qcom_lahaina/tree/lineage-22.1" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="data/images/uemu.png" alt="UEMU" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h3>Uotan RISC-V Emulator</h3>
-                        <p class="project-description">A small rv64gc system emulator that boots real firmware and OS images</p>
-                        <a href="https://github.com/Uotan-Dev/uotan_riscv_emu" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub
-                        </a>
-                    </div>
-                </div>
+<section id="education">
+  <div class="container">
+    <div class="section-title">Education</div>
+    <div class="edu-entry">
+      <div class="school">Nanjing University</div>
+      <div class="degree">B.Sc. in Intelligent Software and Engineering, 2024 &ndash; Present &middot; Suzhou Campus</div>
+    </div>
+  </div>
+</section>
 
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="data/images/semu.png" alt="SEMU" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h3>SN Emulator</h3>
-                        <p class="project-description">My first buggy RV32IMAFD emulator for FUN</p>
-                        <a href="https://github.com/snnbyyds/semu" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub
-                        </a>
-                    </div>
-                </div>
+<footer>
+  <div class="container">
+    &copy; 2026 Nuo Shen
+  </div>
+</footer>
 
-                <div class="project-card project-card-no-image">
-                    <div class="project-image-container project-placeholder">
-                        <div class="placeholder-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>LineageOS for Qualcomm Reference Design 8350</h3>
-                        <p class="project-description">LineageOS device support for "qti Lahaina for arm64"</p>
-                        <a href="https://github.com/QRD-Development/android_device_qcom_lahaina/tree/lineage-21" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="data/images/fajita.jpeg" alt="OnePlus Fajita" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h3>PixelExperience for OnePlus 6T</h3>
-                        <p class="project-description">Official PixelExperience support for OnePlus 6T</p>
-                        <a href="https://github.com/PixelExperience-Devices/device_oneplus_fajita" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section class="experience-section">
-            <div class="section-header">
-                <h2>Experience & Education</h2>
-                <div class="header-line"></div>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Undergraduate Student in Intelligent Software and Engineering</h3>
-                        <p class="timeline-date">2024 - Present</p>
-                        <p>Nanjing University</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact-section">
-            <div class="section-header">
-                <h2>Get In Touch</h2>
-                <div class="header-line"></div>
-            </div>
-            <p>
-                I'm always interested in collaborating on research projects and discussing ideas. Feel free to reach out!
-            </p>
-            <a href="mailto:snnbyyds@gmail.com" class="cta-button">Send me an email</a>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <p>
-            © 2026 Nuo Shen. All rights reserved. <br>
-            Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.
-        </p>
-    </footer>
-
-    <script src="js/animations.js"></script>
 </body>
 </html>
