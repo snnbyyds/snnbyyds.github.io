@@ -6,405 +6,658 @@
 <title>Nuo Shen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
-  /* ── Reset & Base ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --color-bg:       #fafaf9;
-    --color-text:     #1a1a1a;
-    --color-text-alt: #6b7280;
-    --color-accent:   #1e5090;
-    --color-accent-hover: #163d6e;
-    --color-border:   #eaeaea;
-    --color-surface:  #f3f4f5;
-    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --bg: #f7f8fa;
+    --paper: #ffffff;
+    --paper-soft: #f1f4f7;
+    --ink: #171b21;
+    --muted: #5e6673;
+    --quiet: #858d99;
+    --line: #dde3ea;
+    --line-strong: #cbd5df;
+    --accent: #245c9f;
+    --accent-dark: #163d6e;
+    --accent-soft: #e7f0fb;
+    --shadow: 0 18px 50px rgba(22, 32, 46, 0.08);
+    --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
+    min-height: 100vh;
     font-family: var(--font);
-    font-size: 16.5px;
-    line-height: 1.7;
-    color: var(--color-text);
-    background: var(--color-bg);
+    font-size: 16px;
+    line-height: 1.68;
+    color: var(--ink);
+    background:
+      linear-gradient(180deg, rgba(231, 240, 251, 0.7), rgba(247, 248, 250, 0) 360px),
+      var(--bg);
     -webkit-font-smoothing: antialiased;
   }
 
-  a { color: var(--color-accent); text-decoration: none; transition: color 0.2s, opacity 0.2s; }
-  a:hover { color: var(--color-accent-hover); }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+  }
 
-  /* ── Layout ── */
-  .container {
-    max-width: 720px;
+  a:hover { color: var(--accent-dark); }
+
+  .page {
+    display: grid;
+    grid-template-columns: minmax(240px, 315px) minmax(0, 760px);
+    gap: clamp(2rem, 5vw, 4.75rem);
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 0 28px;
+    padding: clamp(2rem, 5vw, 4.75rem) 28px 4rem;
   }
 
-  section { padding: 3.5rem 0; }
-
-  section + section { border-top: 1px solid var(--color-border); }
-
-  .section-title {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color-text-alt);
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    margin-bottom: 1.5rem;
+  .identity {
+    align-self: start;
+    position: sticky;
+    top: 2rem;
   }
 
-  /* ── Header ── */
-  header { padding: 3.5rem 0 2.5rem; }
-
-  .header-inner {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+  .identity-card {
+    padding: 1.35rem;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(221, 227, 234, 0.9);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(18px);
   }
 
-  .header-photo {
-    width: 116px;
-    height: 116px;
+  .portrait {
+    width: 120px;
+    height: 120px;
+    display: block;
     border-radius: 50%;
     object-fit: cover;
-    flex-shrink: 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    margin-bottom: 1.35rem;
+    border: 1px solid var(--line);
   }
 
-  .header-text h1 {
-    font-size: 1.85rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--color-text);
-    line-height: 1.2;
+  h1 {
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: 0;
+    color: var(--ink);
   }
 
-  .header-text .subtitle {
-    font-size: 1.05rem;
-    color: var(--color-text-alt);
-    margin-top: 0.35rem;
-    font-weight: 500;
-  }
-
-  .header-text .affiliation {
-    font-size: 0.9rem;
-    color: var(--color-text-alt);
-    margin-top: 0.2rem;
-  }
-
-  .header-links {
-    display: flex;
-    gap: 0.5rem;
+  .role {
     margin-top: 1rem;
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
   }
 
-  .header-links a {
+  .affiliation {
+    margin-top: 0.25rem;
+    color: var(--quiet);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .contact {
+    display: flex;
+    gap: 0.55rem;
+    margin-top: 1.2rem;
+  }
+
+  .icon-link {
+    width: 38px;
+    height: 38px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    border: 1px solid var(--line);
     border-radius: 50%;
-    color: var(--color-text-alt);
-    font-size: 1rem;
-    transition: background 0.2s, color 0.2s;
+    background: var(--paper);
+    color: var(--muted);
   }
 
-  .header-links a:hover {
-    background: var(--color-surface);
-    color: var(--color-accent);
-  }
-
-  /* ── About ── */
-  .about p {
-    max-width: 62ch;
-    color: var(--color-text);
-  }
-
-  .about p + p { margin-top: 1.15rem; }
-
-  /* ── Publications ── */
-  .pub-entry {
-    padding: 1.4rem 1.5rem;
-    background: var(--color-surface);
-    border-radius: 10px;
-  }
-
-  .pub-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .pub-title a {
-    color: inherit;
-    text-decoration: underline;
-    text-decoration-color: var(--color-border);
-    text-underline-offset: 0.3em;
-    transition: text-decoration-color 0.2s;
-  }
-
-  .pub-title a:hover { text-decoration-color: var(--color-accent); }
-
-  .pub-authors {
-    font-size: 0.9rem;
-    color: var(--color-text-alt);
-    margin-top: 0.4rem;
-  }
-
-  .pub-authors strong { color: var(--color-text); font-weight: 600; }
-
-  .pub-venue {
-    font-size: 0.85rem;
-    color: var(--color-text-alt);
-    margin-top: 0.25rem;
-  }
-
-  .pub-links {
-    display: flex;
-    gap: 0.6rem;
-    margin-top: 0.7rem;
-    font-size: 0.85rem;
-    font-weight: 500;
-  }
-
-  .pub-links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.35rem 0.9rem;
-    border-radius: 6px;
-    background: var(--color-bg);
-    color: var(--color-accent);
-    border: 1px solid var(--color-border);
-    transition: background 0.2s, border-color 0.2s, color 0.2s;
-  }
-
-  .pub-links a:hover {
-    background: var(--color-accent);
-    border-color: var(--color-accent);
+  .icon-link:hover {
+    border-color: var(--accent);
+    background: var(--accent);
     color: #fff;
-  }
-
-  /* ── Projects ── */
-  .project-list {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .project-item {
-    padding: 1.4rem 1.5rem;
-    background: var(--color-surface);
-    border-left: 3px solid var(--color-accent);
-    border-radius: 0 10px 10px 0;
-    transition: box-shadow 0.25s, transform 0.25s;
-  }
-
-  .project-item:hover {
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     transform: translateY(-1px);
   }
 
-  .project-name {
-    font-size: 1.02rem;
+  .focus-box {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .eyebrow {
+    display: block;
+    margin-bottom: 0.65rem;
+    color: var(--quiet);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .chip {
+    padding: 0.24rem 0.55rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper-soft);
+    color: var(--muted);
+    font-size: 0.78rem;
     font-weight: 600;
-    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  main {
+    min-width: 0;
+  }
+
+  .intro {
+    padding: 0.4rem 0 2.5rem;
+  }
+
+  .intro p {
+    max-width: 64ch;
+    margin-top: 1.35rem;
+    color: var(--muted);
+    font-size: 1.08rem;
+    line-height: 1.72;
+  }
+
+  section {
+    padding: 2.35rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 132px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title {
+    color: var(--quiet);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .section-note {
+    max-width: 56ch;
+    color: var(--muted);
+    font-size: 0.94rem;
+  }
+
+  .paper-card,
+  .project-item {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  .paper-card {
+    padding: 1.35rem;
+    box-shadow: 0 12px 32px rgba(22, 32, 46, 0.06);
+  }
+
+  .paper-title {
+    font-size: 1.14rem;
+    font-weight: 750;
+    line-height: 1.38;
+  }
+
+  .paper-title a {
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .paper-title a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .authors,
+  .venue {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .authors {
+    margin-top: 0.55rem;
+  }
+
+  .authors strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .venue {
+    margin-top: 0.18rem;
+  }
+
+  .paper-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 1rem;
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 36px;
+    padding: 0.34rem 0.72rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper-soft);
+    color: var(--muted);
+    font-size: 0.86rem;
+    font-weight: 700;
+  }
+
+  .text-link:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+  }
+
+  .project-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .project-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: start;
+    padding: 1.05rem 1.15rem;
+  }
+
+  .project-item:hover {
+    border-color: var(--line-strong);
+    box-shadow: 0 10px 26px rgba(22, 32, 46, 0.05);
+  }
+
+  .project-name {
+    font-size: 1rem;
+    font-weight: 750;
+    line-height: 1.4;
   }
 
   .project-desc {
-    font-size: 0.9rem;
-    color: var(--color-text-alt);
-    margin-top: 0.35rem;
-    line-height: 1.6;
+    max-width: 62ch;
+    margin-top: 0.3rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.62;
   }
 
   .project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    margin-top: 0.6rem;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--color-text-alt);
-    transition: color 0.2s;
+    white-space: nowrap;
   }
 
-  .project-link:hover { color: var(--color-accent); }
-
-  /* ── Education ── */
-  .edu-entry { padding: 0.25rem 0; }
-
-  .edu-entry .school {
-    font-weight: 600;
-    color: var(--color-text);
+  .education {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    color: var(--muted);
   }
 
-  .edu-entry .degree {
-    font-size: 0.9rem;
-    color: var(--color-text-alt);
-    margin-top: 0.15rem;
+  .school {
+    color: var(--ink);
+    font-weight: 750;
   }
 
-  /* ── Footer ── */
+  .degree {
+    margin-top: 0.18rem;
+    font-size: 0.94rem;
+  }
+
+  .date {
+    color: var(--quiet);
+    font-size: 0.88rem;
+    font-weight: 650;
+    white-space: nowrap;
+  }
+
   footer {
-    padding: 2.5rem 0 4rem;
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--color-text-alt);
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    color: var(--quiet);
+    font-size: 0.82rem;
   }
 
-  /* ── Mobile ── */
-  @media (max-width: 640px) {
-    .container { padding: 0 20px; }
+  @media (max-width: 880px) {
+    .page {
+      display: block;
+      padding: 1.2rem 20px 3rem;
+    }
 
-    header { padding: 2.5rem 0 2rem; }
+    .identity {
+      position: static;
+    }
 
-    .header-inner {
-      flex-direction: column;
-      text-align: center;
+    .identity-card {
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr);
       gap: 1rem;
+      align-items: center;
+      padding: 1rem;
     }
 
-    .header-photo { width: 100px; height: 100px; }
+    .portrait {
+      width: 88px;
+      height: 88px;
+      margin: 0;
+      grid-row: span 3;
+    }
 
-    .header-text h1 { font-size: 1.55rem; }
+    .identity h1 {
+      font-size: 1.75rem;
+      line-height: 1.05;
+    }
 
-    .header-links { justify-content: center; }
+    .role {
+      margin-top: 0.35rem;
+      font-size: 0.95rem;
+    }
 
-    section { padding: 2.5rem 0; }
+    .affiliation {
+      font-size: 0.86rem;
+    }
 
-    .pub-entry { padding: 1.2rem 1.2rem; }
+    .contact {
+      margin-top: 0.8rem;
+    }
 
-    .project-item {
-      border-left: none;
-      border-top: 3px solid var(--color-accent);
-      border-radius: 10px;
+    .focus-box {
+      grid-column: 1 / -1;
+      margin-top: 0;
+      padding-top: 0.9rem;
+    }
+
+    .intro {
+      padding-top: 2.35rem;
+    }
+
+    .intro h2 {
+      max-width: 12ch;
     }
   }
 
-  /* ── Reduced motion ── */
+  @media (max-width: 620px) {
+    body {
+      font-size: 15.5px;
+      background:
+        linear-gradient(180deg, rgba(231, 240, 251, 0.8), rgba(247, 248, 250, 0) 280px),
+        var(--bg);
+    }
+
+    .page {
+      padding-inline: 16px;
+    }
+
+    .identity-card {
+      grid-template-columns: 70px minmax(0, 1fr);
+      gap: 0.85rem;
+    }
+
+    .portrait {
+      width: 70px;
+      height: 70px;
+    }
+
+    .identity h1 {
+      font-size: 1.48rem;
+    }
+
+    .role,
+    .affiliation {
+      line-height: 1.42;
+    }
+
+    .contact {
+      gap: 0.45rem;
+    }
+
+    .icon-link {
+      width: 36px;
+      height: 36px;
+    }
+
+    .intro {
+      padding-bottom: 2rem;
+    }
+
+    .intro p {
+      font-size: 1rem;
+      line-height: 1.66;
+    }
+
+    section {
+      padding: 2rem 0;
+    }
+
+    .section-head {
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .section-note {
+      margin-top: 0.45rem;
+    }
+
+    .paper-card {
+      padding: 1rem;
+    }
+
+    .project-item,
+    .education {
+      display: block;
+    }
+
+    .project-link {
+      margin-top: 0.75rem;
+    }
+
+    .date {
+      display: block;
+      margin-top: 0.45rem;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
   }
 
-  /* ── Print ── */
   @media print {
-    body { font-size: 12.5px; line-height: 1.5; }
-    header { padding: 1rem 0; }
-    .header-photo { width: 64px; height: 64px; }
-    header { padding: 0.5rem 0; }
-    section { padding: 0.75rem 0; }
-    .pub-entry, .project-item { background: none; border: 1px solid #ddd; box-shadow: none; }
-    .project-item:hover { transform: none; box-shadow: none; }
+    body {
+      background: #fff;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .page {
+      display: block;
+      max-width: none;
+      padding: 0;
+    }
+
+    .identity {
+      position: static;
+    }
+
+    .identity-card,
+    .paper-card,
+    .project-item {
+      box-shadow: none;
+      background: #fff;
+      border-color: #ccc;
+    }
+
+    .identity-card {
+      display: block;
+      padding: 0 0 0.75rem;
+      border: 0;
+    }
+
+    .portrait,
+    .contact,
+    .focus-box {
+      display: none;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .intro,
+    section {
+      padding: 0.75rem 0;
+    }
+
+    footer {
+      padding-top: 0.75rem;
+    }
   }
 </style>
 </head>
 <body>
+  <div class="page">
+    <aside class="identity" aria-label="Profile">
+      <div class="identity-card">
+        <img class="portrait" src="data/images/sn.jpg" alt="Nuo Shen" width="120" height="120" loading="eager" decoding="async">
+        <div>
+          <h1>Nuo Shen</h1>
+          <div class="role">Undergraduate Student, Nanjing&nbsp;University</div>
+          <div class="affiliation">Intelligent Software and Engineering &middot; 2024 &ndash; Present</div>
+          <div class="contact">
+            <a class="icon-link" href="https://github.com/snnbyyds" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+            <a class="icon-link" href="mailto:snnbyyds@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
 
-<header>
-  <div class="container">
-    <div class="header-inner">
-      <img class="header-photo" src="data/images/sn.jpg" alt="Nuo Shen" width="116" height="116" loading="eager" decoding="async">
-      <div class="header-text">
-        <h1>Nuo Shen</h1>
-        <div class="subtitle">Undergraduate Student, Nanjing University</div>
-        <div class="affiliation">Intelligent Software and Engineering &middot; 2024 &ndash; Present</div>
-        <div class="header-links">
-          <a href="https://github.com/snnbyyds" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-          <a href="mailto:snnbyyds@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <div class="focus-box">
+          <span class="eyebrow">Research Focus</span>
+          <div class="chips" aria-label="Research focus areas">
+            <span class="chip">LLM inference</span>
+            <span class="chip">AI systems</span>
+            <span class="chip">GPU kernels</span>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</header>
+    </aside>
 
-<section id="about">
-  <div class="container">
-    <div class="about">
-      <p>
-        I am an undergraduate student at Nanjing University interested in building efficient systems for large-scale machine learning. My current work spans speculative decoding and sparse attention for LLM inference, GPU kernel optimization with CUDA and Triton, and system-level programming.
-      </p>
-    </div>
-  </div>
-</section>
+    <main>
+      <div class="intro">
+        <p>
+          I am an undergraduate student at Nanjing University interested in building efficient systems for large-scale machine learning. My current work spans speculative decoding and sparse attention for LLM inference, GPU kernel optimization, and system-level programming.
+        </p>
+      </div>
 
-<section id="publications">
-  <div class="container">
-    <div class="section-title">Preprints</div>
-    <div class="pub-entry">
-      <div class="pub-title">
-        <a href="https://arxiv.org/abs/2605.19893" target="_blank" rel="noopener">SSV: Sparse Speculative Verification for Efficient LLM Inference</a>
-      </div>
-      <div class="pub-authors">
-        Zhibin Wang, Ziyu Zhong, <strong>Nuo Shen</strong>, Yuhang Zhou, Rong Gu, Sheng Zhong
-      </div>
-      <div class="pub-venue">
-        State Key Laboratory for Novel Software Technology, Nanjing University &middot; arXiv: 2605.19893 [cs.OS], 2026
-      </div>
-      <div class="pub-links">
-        <a href="https://arxiv.org/abs/2605.19893" target="_blank" rel="noopener"><i class="fas fa-file-lines"></i> arXiv</a>
-        <a href="https://arxiv.org/pdf/2605.19893" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i> PDF</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="container">
-    <div class="section-title">Projects</div>
-    <div class="project-list">
-      <div class="project-item">
-        <div class="project-name">Uotan RISC-V Emulator NG</div>
-        <div class="project-desc">
-          A full-system RISC-V emulator (RV64GC) capable of booting real firmware and OS images, including Debian and EDK2/UEFI. Emphasizes ISA compliance and educational clarity.
+      <section id="publications">
+        <div class="section-head">
+          <div class="section-title">Preprints</div>
         </div>
-        <a class="project-link" href="https://github.com/Uotan-Dev/uotan_riscv_emu-ng" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-      </div>
 
-      <div class="project-item">
-        <div class="project-name">Gated Delta Net Kernel Implementation</div>
-        <div class="project-desc">
-          Optimized CUDA/Triton kernels for the Gated Delta Net (Qwen3-Next) architecture, developed as part of the MLSys 2026 FlashInfer AI Kernel Generation Competition.
+        <article class="paper-card">
+          <div class="paper-title">
+            <a href="https://arxiv.org/abs/2605.19893" target="_blank" rel="noopener">SSV: Sparse Speculative Verification for Efficient LLM Inference</a>
+          </div>
+          <div class="authors">
+            Zhibin Wang, Ziyu Zhong, <strong>Nuo Shen</strong>, Yuhang Zhou, Rong Gu, Sheng Zhong
+          </div>
+          <div class="venue">
+            State Key Laboratory for Novel Software Technology, Nanjing University &middot; arXiv: 2605.19893 [cs.OS], 2026
+          </div>
+          <div class="paper-actions">
+            <a class="text-link" href="https://arxiv.org/abs/2605.19893" target="_blank" rel="noopener"><i class="fas fa-file-lines"></i> arXiv</a>
+            <a class="text-link" href="https://arxiv.org/pdf/2605.19893" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i> PDF</a>
+          </div>
+        </article>
+      </section>
+
+      <section id="projects">
+        <div class="section-head">
+          <div class="section-title">Projects</div>
         </div>
-        <a class="project-link" href="https://github.com/CudaSyncThreads/flashinfer-bench-starter-kit" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-      </div>
 
-      <div class="project-item">
-        <div class="project-name">LineageOS for Qualcomm Reference Design</div>
-        <div class="project-desc">
-          Android device tree and vendor support for the QRD 8350 (lahaina) platform.
+        <div class="project-list">
+          <article class="project-item">
+            <div>
+              <div class="project-name">Uotan RISC-V Emulator NG</div>
+              <div class="project-desc">
+                A full-system RISC-V emulator (RV64GC) capable of booting real firmware and OS images, including Debian and EDK2/UEFI. Emphasizes ISA compliance and educational clarity.
+              </div>
+            </div>
+            <a class="text-link project-link" href="https://github.com/Uotan-Dev/uotan_riscv_emu-ng" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+          </article>
+
+          <article class="project-item">
+            <div>
+              <div class="project-name">Gated Delta Net Kernel Implementation</div>
+              <div class="project-desc">
+                Optimized CUDA/Triton kernels for the Gated Delta Net (Qwen3-Next) architecture, developed as part of the MLSys 2026 FlashInfer AI Kernel Generation Competition.
+              </div>
+            </div>
+            <a class="text-link project-link" href="https://github.com/CudaSyncThreads/flashinfer-bench-starter-kit" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+          </article>
+
+          <article class="project-item">
+            <div>
+              <div class="project-name">LineageOS for Qualcomm Reference Design</div>
+              <div class="project-desc">
+                Android device tree and vendor support for the QRD 8350 (lahaina) platform.
+              </div>
+            </div>
+            <a class="text-link project-link" href="https://github.com/QRD-Development/android_device_qcom_lahaina/tree/lineage-22.1" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+          </article>
         </div>
-        <a class="project-link" href="https://github.com/QRD-Development/android_device_qcom_lahaina/tree/lineage-22.1" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
-<section id="education">
-  <div class="container">
-    <div class="section-title">Education</div>
-    <div class="edu-entry">
-      <div class="school">Nanjing University</div>
-      <div class="degree">B.Sc. in Intelligent Software and Engineering, 2024 &ndash; Present &middot; Suzhou Campus</div>
-    </div>
-  </div>
-</section>
+      <section id="education">
+        <div class="section-head">
+          <div class="section-title">Education</div>
+          <div class="education">
+            <div>
+              <div class="school">Nanjing University</div>
+              <div class="degree">B.Sc. in Intelligent Software and Engineering &middot; Suzhou Campus</div>
+            </div>
+            <div class="date">2024 &ndash; Present</div>
+          </div>
+        </div>
+      </section>
 
-<footer>
-  <div class="container">
-    &copy; 2026 Nuo Shen
+      <footer>
+        &copy; 2026 Nuo Shen
+      </footer>
+    </main>
   </div>
-</footer>
-
 </body>
 </html>
